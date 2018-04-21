@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" 
+src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+</html>
+<body>
+<main>
+    <h2>{{'Universidad de Guayaquil - CISC #JuntosPodemos'}}</h2>
+    <form @submit.prevent="createUser">
+            <input type="text" placeholder="Nombre" v-model="objUser.nombre"/>
+        </br>
+            <input type="text" placeholder="Cedula" v-model="objUser.cedula"/>
+        </br>
+            <input type="text" placeholder="Telefono" v-model="objUser.telefono"/>
+        </br>
+            <input  placeholder="Edad" v-model="objUser.edad"/>
+        </br>
+            <input type="submit" value="Guardar" />
+    </form>
+    <table>
+        <thead>
+            <th>NOMBRE</th>
+            <th>CEDULA</th>
+            <th>TELEFONO</th>
+            <th>EDAD</th>
+            <th>OBSERVACION</th>
+        </thead>
+    <tbody>
+    <tr v-for="(item ,idx) in users">
+    <td>{{item.nombre}}</td>
+    <td>{{item.cedula}}</td>
+    <td>{{item.telefono}}</td>
+    <td>{{item.edad}}</td>
+    </tr>
+    </tbody>
+    </table>
+    
+    
+</main>
+</body>
+<script type="text/javascript">
+new Vue({
+    el:'main',
+    data:{
+            users:[
+                {'nombre':null,'cedula':null,'telefono':null, 'edad':null},
+               
+            ],
+            objUser:{'nombre':null,'cedula':null,'telefono':null, 'edad':null}
+    },
+  
+    methods:{
+        createUser(){
+            this.users.unshift(this.objUser)
+            this.orderUser
+            this.objUser={'nombre':null,'cedula':null,'telefono':null, 'edad':null}
+        }
+    },
+    computed:{
+        orderUser(){
+            return this.users.sort(function(a,b){
+                if(a.nombre > b.nombre){
+                    return 1;
+                }
+                if(a.nombre > b.nombre){
+                    return -1;
+                }
+                return 0;
+            });
+            }
+    }
+});
+</script>
